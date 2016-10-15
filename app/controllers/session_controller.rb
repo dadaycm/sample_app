@@ -7,8 +7,8 @@ class SessionController < ApplicationController
         if user && user.authenticate(params[:session][:password])
             log_in user
 
-            # chapter 9.1.2; code 9.7
-            remember user
+            # chapter 9.2 remember me
+            params[:session][:remember_me] == '1' ? remember(user) : forget(user)
 
             redirect_to user
         else
